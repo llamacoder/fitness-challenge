@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.json())
 
 app.get('/summaries', dataServer.getSummaries);
-app.get('/details/:id', dataServer.getDetails);
+app.get('/details/:name', dataServer.getDetails);
 app.post('/details', dataServer.createDetails);
 
 // For all GET requests, send back index.html
@@ -22,4 +22,4 @@ app.get('/*', function(req, res) {
 
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080, () => console.log("listening on 8080"));
+app.listen(process.env.PORT || 8000, () => console.log("listening on 8000"));

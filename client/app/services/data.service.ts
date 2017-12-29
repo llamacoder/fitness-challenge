@@ -1,29 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Detail } from '../components/detail/detail'
-import { Summary } from '../components/summary/summary'
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
 
-  constructor() {
+  constructor(public http:Http) {
     console.log('data service')
   }
 
-  getAllSummaries(): Summary[] {
-    return [
-      { userName: 'Cokey',
-        userGoal: 3000,
-        userProgress: 2470
-      },
-      { userName: 'Paige',
-        userGoal: 3000,
-        userProgress: 2472
-      },
-      { userName: 'Tracey',
-        userGoal: 3000,
-        userProgress: 2400
-      }
-    ]
+  getAllSummaries() {
+    return this.http.get('/summaries')
+      .map(res => res.json())
+  }
+
+  getDetails(name) {
+    let route = '/details/' + name
+    console.log("inside getDetails, route is " + route)
+    return this.http.get(route)
+      .map(res => res.json())
   }
 
 }

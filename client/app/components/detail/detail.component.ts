@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 import { Detail } from './detail';
 
 @Component({
@@ -7,24 +8,33 @@ import { Detail } from './detail';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  name:string = 'Fred';
   goal:string = '';
-  progressData:Detail[] = [];
+  progressData = [];
   total:number = 0;
+  userName = '';
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.name = 'Cokey';
-    this.goal = '3000 body lifts in January';
-    this.total = 600;
-    this.progressData = [
-      {date: 'Jan 6', progress:100},
-      {date: 'Jan 5', progress:200},
-      {date: 'Jan 3', progress:100},
-      {date: 'Jan 2', progress:100},
-      {date: 'Jan 1', progress:100}
-    ]
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    this.userName = JSON.parse(localStorage.getItem('userName'));
+    this.dataService.getDetails(this.userName).subscribe((details) => {
+      //  set the data bits
+      // this.userName = details[0].name
+      this.goal = details[0].goal_text
+      for (let i = 0; i < details.length; i++) {
+        let obj = {}
+        let dateObj = new Date(details[i].date)
+        let dateStr = monthNames[dateObj.getMonth()] + ' ' + dateObj.getDate()
+        obj['date'] = dateStr
+        obj['progress'] = details[i].progress
+        this.progressData.unshift(obj)
+        this.total += details[i].progress
+      }
+    })
   }
 
   onSave() {

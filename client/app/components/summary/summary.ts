@@ -1,5 +1,6 @@
 export interface Summary {
-  userName: string,
-  userGoal: number,
-  userProgress: number
+  id: number,
+  name: string,
+  goal_num: number,
+  sum: number
 }

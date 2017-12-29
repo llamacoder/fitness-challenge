@@ -28,10 +28,10 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let userSum of userSummaries">
-          <td>{{userSum.userName}}</td>
-          <td>{{userSum.userGoal}}</td>
-          <td>{{userSum.userProgress}}</td>
+        <tr *ngFor="let userSum of userSummaries" (click)="onClick($event.target)">
+          <td>{{userSum.name}}</td>
+          <td>{{userSum.goal_num}}</td>
+          <td>{{userSum.sum}}</td>
         </tr>
       </tbody>
     </table>

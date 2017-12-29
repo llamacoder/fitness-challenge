@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Summary } from './summary'
 
-
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -16,7 +15,18 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
     this.daysToGo = this.calcDaysToGo();
-    this.userSummaries = this.dataService.getAllSummaries()
+    this.dataService.getAllSummaries().subscribe((summaries) => {
+      this.userSummaries = summaries
+    })
+  }
+
+  onClick(target) {
+    console.log("in onClick, name is " + target.parentNode.firstElementChild.innerHTML)
+    localStorage.setItem('userName',
+          JSON.stringify(target.parentNode.firstElementChild.innerHTML));
+
+    window.location.href = "/detail";
+    // this.userName = target.parentNode.firstElementChild.innerHTML
   }
 
   calcDaysToGo() {

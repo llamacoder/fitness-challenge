@@ -12,8 +12,9 @@ function getSummaries(req, res) {
 }
 
 function getDetails(req, res) {
-  let queryString = 'select * from users join progress on users.id=progress.user_id where users.id=';
-  queryString += req.params.id
+  let queryString = "select * from users join progress on users.id=progress.user_id where users.name='";
+  queryString += req.params.name
+  queryString += "' order by date"
   return knex.raw(queryString)
       .then(details => {
         if (!details || !details.rows || details.rows.length < 1) res.sendStatus(404)
@@ -22,7 +23,6 @@ function getDetails(req, res) {
 }
 
 function createDetails(req, res) {
-  console.log(req.body);
   return knex('progress')
       .insert({'user_id': req.body.user_id, 'date': req.body.date,
                 'progress': req.body.progress })
