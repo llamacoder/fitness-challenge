@@ -25,8 +25,7 @@ export class SummaryComponent implements OnInit {
     localStorage.setItem('userName',
           JSON.stringify(target.parentNode.firstElementChild.innerHTML));
 
-    window.location.href = "/detail";
-    // this.userName = target.parentNode.firstElementChild.innerHTML
+    window.location.assign("/detail");
   }
 
   calcDaysToGo() {

@@ -21,4 +21,9 @@ export class DataService {
       .map(res => res.json())
   }
 
+  saveProgress(date, progress, user) {
+      return this.http.post('/details', {date: date, progress: progress, user_id: user})
+          .map(res => res.json())
+  }
+
 }

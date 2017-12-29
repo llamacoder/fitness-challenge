@@ -11,7 +11,10 @@ export class DetailComponent implements OnInit {
   goal:string = '';
   progressData = [];
   total:number = 0;
-  userName = '';
+  userName:string = '';
+  userID:number;
+  tempDate = '';
+  tempProgress = 100;
 
   constructor(private dataService:DataService) { }
 
@@ -20,14 +23,17 @@ export class DetailComponent implements OnInit {
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
 
+    let dateObj = new Date();
+    this.tempDate = monthNames[dateObj.getMonth()] + ' ' + dateObj.getDate()
     this.userName = JSON.parse(localStorage.getItem('userName'));
+
     this.dataService.getDetails(this.userName).subscribe((details) => {
       //  set the data bits
-      // this.userName = details[0].name
       this.goal = details[0].goal_text
+      this.userID = details[0].user_id
       for (let i = 0; i < details.length; i++) {
         let obj = {}
-        let dateObj = new Date(details[i].date)
+        dateObj = new Date(details[i].date)
         let dateStr = monthNames[dateObj.getMonth()] + ' ' + dateObj.getDate()
         obj['date'] = dateStr
         obj['progress'] = details[i].progress
@@ -37,10 +43,16 @@ export class DetailComponent implements OnInit {
     })
   }
 
-  onSave() {
-    // console.log('inside save, date is ' + date + ' and progress is ' + progress)
+  onSave(progdate, prognum) {
+    let newDate = new Date(progdate)
+    newDate.setFullYear(new Date().getFullYear())
+    this.dataService.saveProgress(newDate, prognum, this.userID).subscribe(results => {
+    })
+  }
 
-    this.progressData.unshift({date:'1/2/2018', progress:100})
+  onHome() {
+    window.location.assign('/');
+    return false
   }
 
 }

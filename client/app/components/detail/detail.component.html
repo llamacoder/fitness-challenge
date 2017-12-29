@@ -16,20 +16,13 @@
     <div class="row" id="form-row">
       <form>
         <div class='s6'>
-          <!-- <label for="input-date">Date</label> -->
-          <input input-date
-              type="text"
-              name="created"
-              id="inputCreated"
-              placeholder="date"
-              ng-model="currentTime"
-              format="dd/mm/yyyy" #inDate />
+          <input type="text" #progdate value={{tempDate}} >
         </div>
         <div class='s6'>
-          <!-- <label for="progress">Progress</label> -->
-          <input name="progress" type="text" placeholder="100" #progress>
+          <input #prognum type="text" value={{tempProgress}} >
         </div>
-        <button (click)='onSave()' class='teal white-text'>Add</button>
+        <button (click)='onSave(progdate.value, prognum.value)' class='teal white-text'>Add</button>
+        <button (click)='onHome()' class='teal white-text'>Home</button>
       </form>
     </div>
 
@@ -59,16 +52,5 @@
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
 
-    <!-- //  initialize datepicker -->
-    <script type="text/javascript">
-      $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Ok',
-        closeOnSelect: true // Close upon selecting a date,
-      });
-    </script>
   </body>
 </html>
