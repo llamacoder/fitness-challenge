@@ -10,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod",
-    "heroku-postbuild": "knex migrate:latest",
-    "knex":"knex"
+    "heroku-postbuild": "./server/knex migrate:latest",
+    "knex":"./server/knex"
   },
   "private": true,
   "dependencies": {
