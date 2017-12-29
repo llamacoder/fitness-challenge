@@ -3,14 +3,16 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const dataServer = require('./server/data-server')
+const bodyParser = require('body-parser')
 
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
+app.use(bodyParser.json())
 
 app.get('/summaries', dataServer.getSummaries);
 app.get('/details/:id', dataServer.getDetails);
-app.post('/details/:id', dataServer.createDetails);
+app.post('/details', dataServer.createDetails);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used
