@@ -13,17 +13,23 @@
       <p>Goal: <span class="goal">{{goal}}</span></p>
       <p>Total So Far: <span class='total'>{{total}}</span></p>
     </div>
-    <div class="row" id="form-row">
-      <form>
-        <div class='s6'>
-          <input type="text" #progdate value={{tempDate}} >
-        </div>
-        <div class='s6'>
-          <input #prognum type="text" value={{tempProgress}} >
-        </div>
-        <button (click)='onSave(progdate.value, prognum.value)' class='teal white-text'>Add</button>
-        <button (click)='onHome()' class='teal white-text'>Home</button>
-      </form>
+
+    <div *ngIf=isEditable>
+      <div class="row" id="form-row">
+        <form>
+          <div class='s6'>
+            <input type="text" #progdate value={{tempDate}} >
+          </div>
+          <div class='s6'>
+            <input #prognum type="text" value={{tempProgress}} >
+          </div>
+          <button (click)='onSave(progdate.value, prognum.value)' class='teal white-text'>Add</button>
+          <button (click)='onHome()' class='teal white-text'>Home</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf=!isEditable>
+      <button (click)='onHome()' class='teal white-text'>Home</button>
     </div>
 
     <div class='row' style='max-width:400px'>

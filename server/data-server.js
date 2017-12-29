@@ -33,7 +33,20 @@ function createDetails(req, res) {
       })
 }
 
+function tryLogin(req, res) {
+  return knex('users')
+      .where('name', req.body.name)
+      .then(users => {
+        if (!users || users.length < 1) res.sendStatus(404)
+        else {
+          if (users[0].pswd == req.body.pswd)
+            res.status(200).json(users)
+          else res.sendStatus(404)
+        }
+      })
+}
+
 
 module.exports = {
-  getSummaries, getDetails, createDetails
+  getSummaries, getDetails, createDetails, tryLogin
 }

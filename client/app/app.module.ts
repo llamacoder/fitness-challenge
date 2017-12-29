@@ -9,18 +9,20 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { DetailComponent } from './components/detail/detail.component';
 
 import { DataService } from './services/data.service';
+import { LoginComponent } from './components/login/login.component';
 
 const appRoutes: Routes = [
   { path:'', component: SummaryComponent },
-  { path:'detail', component: DetailComponent }
-  // { path:'login', component: LoginComponent }
+  { path:'detail', component: DetailComponent },
+  { path:'login', component: LoginComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SummaryComponent,
-    DetailComponent
+    DetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

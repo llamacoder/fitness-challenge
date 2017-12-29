@@ -10,10 +10,20 @@ import { Summary } from './summary'
 export class SummaryComponent implements OnInit {
   daysToGo:number = 7;
   userSummaries:Summary[] = [];
+  thisUser:string;
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    //  see if user is logged in...
+    console.log("getting thisUser")
+    this.thisUser = JSON.parse(localStorage.getItem('thisUser'));
+    console.log("thisUser " + this.thisUser)
+    if (!this.thisUser) {
+      alert('user is not logged in')
+      window.location.assign('/login')
+      return false
+    }
     this.daysToGo = this.calcDaysToGo();
     this.dataService.getAllSummaries().subscribe((summaries) => {
       this.userSummaries = summaries
@@ -21,7 +31,6 @@ export class SummaryComponent implements OnInit {
   }
 
   onClick(target) {
-    console.log("in onClick, name is " + target.parentNode.firstElementChild.innerHTML)
     localStorage.setItem('userName',
           JSON.stringify(target.parentNode.firstElementChild.innerHTML));
 

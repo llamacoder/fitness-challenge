@@ -15,6 +15,7 @@ export class DetailComponent implements OnInit {
   userID:number;
   tempDate = '';
   tempProgress = 100;
+  isEditable:boolean = false;
 
   constructor(private dataService:DataService) { }
 
@@ -26,7 +27,11 @@ export class DetailComponent implements OnInit {
     let dateObj = new Date();
     this.tempDate = monthNames[dateObj.getMonth()] + ' ' + dateObj.getDate()
     this.userName = JSON.parse(localStorage.getItem('userName'));
-
+    if (this.userName == JSON.parse(localStorage.getItem('thisUser'))) {
+      this.isEditable = true;
+    } else {
+      this.isEditable = false;
+    }
     this.dataService.getDetails(this.userName).subscribe((details) => {
       //  set the data bits
       this.goal = details[0].goal_text

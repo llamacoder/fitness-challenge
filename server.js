@@ -13,6 +13,7 @@ app.use(bodyParser.json())
 app.get('/summaries', dataServer.getSummaries);
 app.get('/details/:name', dataServer.getDetails);
 app.post('/details', dataServer.createDetails);
+app.post('/login', dataServer.tryLogin);
 
 // For all GET requests, send back index.html
 // so that PathLocationStrategy can be used

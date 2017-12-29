@@ -26,4 +26,9 @@ export class DataService {
           .map(res => res.json())
   }
 
+  tryLogin(name, pswd) {
+      return this.http.post('/login', {name: name, pswd: pswd})
+          .map(res => res.json())
+  }
+
 }
