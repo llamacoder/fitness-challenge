@@ -49,10 +49,14 @@ export class DetailComponent implements OnInit {
   }
 
   onSave(progdate, prognum) {
-    let newDate = new Date(progdate)
-    newDate.setFullYear(new Date().getFullYear())
-    this.dataService.saveProgress(newDate, prognum, this.userID).subscribe(results => {
-    })
+    let dateStr = progdate + " 2018"
+    if (isNaN(Date.parse(dateStr))) {
+      alert("Date is not valid: " + dateStr)
+    } else {
+      let newDate = new Date(dateStr)
+      this.dataService.saveProgress(newDate, prognum, this.userID).subscribe(results => {
+      })
+    }
   }
 
   onHome() {
