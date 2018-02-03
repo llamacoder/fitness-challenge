@@ -40,7 +40,7 @@ export class SummaryComponent implements OnInit {
   calcDaysToGo() {
     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
     var firstDate = new Date();   //  today
-    var secondDate = new Date(2018,0,31);  //  endOfChallenge
+    var secondDate = new Date(2018,1,28);  //  endOfChallenge
 
     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
     return diffDays
