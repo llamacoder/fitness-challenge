@@ -43,7 +43,7 @@ export class SummaryComponent implements OnInit {
     var secondDate = new Date(2018,1,28);  //  endOfChallenge
 
     var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-    return diffDays
+    return diffDays + 1;
   }
 
 }
